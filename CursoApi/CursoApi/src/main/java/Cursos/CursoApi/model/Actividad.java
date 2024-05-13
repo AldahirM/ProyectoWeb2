@@ -7,26 +7,23 @@ import java.util.List;
 public class Actividad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_Actividad;
+    private Integer idActividad;
 
-    @OneToMany(mappedBy = "actividad")
-    private List<Leccion_Actividad> leccion_actividades;
-
-    @OneToMany(mappedBy = "actividad")
-    private List<Actividad_Pregunta> actividad_preguntas;
-
+    @ManyToOne
+    private List<Curso> cursos;
+    
     @Column(nullable = false, length = 250)
     private String descripcion;
 
     @Column(nullable = false, length = 5)
-    private boolean completada;
+    private boolean esCorrecto;
 
     @Column(nullable = false, length = 6)
-    private double calificacion;
+    private float calificacion;
 
-    public Actividad(String descripcion, boolean completada, double calificacion) {
+    public Actividad(String descripcion, boolean esCorrecto, float calificacion) {
         this.descripcion = descripcion;
-        this.completada = completada;
+        this.esCorrecto = esCorrecto;
         this.calificacion = calificacion;
     }
 
@@ -65,21 +62,7 @@ public class Actividad {
         this.calificacion = calificacion;
     }
 
-    public void setActividad_preguntas(List<Actividad_Pregunta> actividad_preguntas) {
-        this.actividad_preguntas = actividad_preguntas;
-    }
-
-    public void setLeccion_actividades(List<Leccion_Actividad> leccion_actividades) {
-        this.leccion_actividades = leccion_actividades;
-    }
-
-    public List<Leccion_Actividad> getLeccion_actividades() {
-        return leccion_actividades;
-    }
-
-    public List<Actividad_Pregunta> getActividad_preguntas() {
-        return actividad_preguntas;
-    }
+    
 
     @Override
     public String toString() {

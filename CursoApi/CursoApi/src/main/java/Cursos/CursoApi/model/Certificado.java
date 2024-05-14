@@ -18,7 +18,7 @@ public class Certificado {
     private Curso curso;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idCorreo")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Usuario usuario;
 

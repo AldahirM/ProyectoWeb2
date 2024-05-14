@@ -1,6 +1,7 @@
 package Cursos.CursoApi.controller;
 
 import Cursos.CursoApi.model.Usuario;
+import Cursos.CursoApi.model.Curso;
 import Cursos.CursoApi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +11,12 @@ import java.net.URI;
 import java.util.Optional;
 
 
-
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    /*@Autowired
+    @Autowired
     UsuarioRepository usuarioRepository;
 
     @GetMapping
@@ -24,9 +24,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioRepository.findAll());
     }
 
-    @GetMapping("/{id_Usuario}")
-    public ResponseEntity<Usuario> getUsuario(@PathVariable Integer id_Usuario) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id_Usuario);
+    @GetMapping("/{idUsuario}")
+    public ResponseEntity<Usuario> getUsuario(@PathVariable String idUsuario) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
         if (usuarioOptional.isPresent()) {
             return ResponseEntity.ok(usuarioOptional.get());
         } else {
@@ -34,30 +34,18 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/buscar/{correo}")
-    public ResponseEntity<Usuario> buscarPorCorreo(@PathVariable String correo) {
-        Usuario usuario = usuarioRepository.findByCorreo(correo);
-        if (usuario != null) {
-            return ResponseEntity.ok(usuario);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    
-
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody Usuario newUsuario, UriComponentsBuilder ucb) {
         Usuario savedUsuario = usuarioRepository.save(newUsuario);
-        URI uri = ucb.path("/usuario/{id_Usuario}").buildAndExpand(savedUsuario.getIdUsuario()).toUri();
+        URI uri = ucb.path("/usuario/{id_Usuario}").buildAndExpand(savedUsuario.getIdCorreo()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping("/{id_Usuario}")
-    public ResponseEntity<Void> update(@PathVariable Integer id_Usuario, @RequestBody Usuario usuarioAct) {
-        Usuario usuarioAnt = usuarioRepository.findById(id_Usuario).get();
+    @PutMapping("/{idUsuario}")
+    public ResponseEntity<Void> update(@PathVariable String idUsuario, @RequestBody Usuario usuarioAct) {
+        Usuario usuarioAnt = usuarioRepository.findById(idUsuario).get();
         if (usuarioAnt != null) {
-            usuarioAct.setIdUsuario((usuarioAnt.getIdUsuario()));
+            usuarioAct.setIdCorreo((usuarioAnt.getIdCorreo()));
             usuarioRepository.save(usuarioAct);
             return ResponseEntity.noContent().build();
         }
@@ -65,11 +53,21 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id_Usuario}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id_Usuario) {
-        if (usuarioRepository.findById(id_Usuario).isPresent()) {
-            usuarioRepository.deleteById(id_Usuario );
+    public ResponseEntity<Void> delete(@PathVariable String idUsuario) {
+        if (usuarioRepository.findById(idUsuario).isPresent()) {
+            usuarioRepository.deleteById(idUsuario);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
-    }*/
+    }
+
+    @GetMapping("/{idUsuario}/cursos")
+    public ResponseEntity<Iterable<Curso>> getCursos(@PathVariable String idUsuario) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
+        if (usuarioOptional.isPresent()) {
+            return ResponseEntity.ok(usuarioOptional.get().getCursos());
+        }
+        return ResponseEntity.notFound().build();
+
+    }
 }

@@ -26,7 +26,7 @@ public class Curso {
     private List<Actividad> actividades;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_curso", joinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"), inverseJoinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"))
+    @JoinTable(name = "usuario_curso", joinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"), inverseJoinColumns = @JoinColumn(name = "idCorreo", referencedColumnName = "idCorreo"))
     private List<Usuario> usuarios;
 
     @OneToOne(mappedBy = "curso", cascade = CascadeType.ALL)

@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class Usuario {
 
     @Id
-    @Column(name = "idUsuario", nullable = false, length = 10)
+    @Column(name = "idCorreo", nullable = false, length = 10)
     private String idCorreo;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -18,7 +18,7 @@ public class Usuario {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     @JoinTable(name = "usuario_curso",
-        joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"),
+        joinColumns = @JoinColumn(name = "idCorreo", referencedColumnName = "idCorreo"),
         inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"))
     private List<Curso> cursos;
 

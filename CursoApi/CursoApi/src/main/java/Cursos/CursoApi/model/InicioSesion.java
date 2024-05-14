@@ -12,7 +12,7 @@ public class InicioSesion {
     private Integer idInicioSesion;
 
     @OneToOne
-    @JoinColumn(name = "id_Usuario")
+    @JoinColumn(name = "idCorreo")
     private Usuario usuario;
 
     @Column(nullable = false, length = 20)

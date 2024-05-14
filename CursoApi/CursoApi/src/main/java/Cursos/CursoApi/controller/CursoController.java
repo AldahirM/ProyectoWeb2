@@ -19,7 +19,8 @@ public class CursoController {
 
     //Consulta general
     @GetMapping()
-    public ResponseEntity<Iterable<Curso>> findAll(){
+    public ResponseEntity<Iterable<Curso>> findAll()
+    {
         return ResponseEntity.ok(cursoRepository.findAll());
     }
 

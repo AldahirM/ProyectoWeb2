@@ -2,9 +2,12 @@ package Cursos.CursoApi.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCurso")
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

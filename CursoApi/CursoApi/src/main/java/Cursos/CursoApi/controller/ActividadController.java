@@ -2,6 +2,7 @@ package Cursos.CursoApi.controller;
 
 import Cursos.CursoApi.model.Actividad;
 import Cursos.CursoApi.repository.ActividadRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,9 @@ import java.util.Optional;
 @RequestMapping("/actividad")
 public class ActividadController {
 
-    @Autowired//holaaa
+    @Autowired
     private ActividadRepository actividadRepository;
+
 
     //Consulta general
     @GetMapping()
@@ -25,16 +27,16 @@ public class ActividadController {
     }
 
     //Consulta por id
-    @GetMapping("/{idActividad}")
+    @GetMapping("/{idExamen}")
     public  ResponseEntity<Actividad> findById(@PathVariable Integer idActividad){
-        Optional<Actividad> actividadOptional = actividadRepository.findById(idActividad);
-        if (!actividadOptional.isPresent()){
+        Optional<Actividad> examenOptional = actividadRepository.findById(idActividad);
+        if (!examenOptional.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(actividadOptional.get());
+        return ResponseEntity.ok(examenOptional.get());
     }
 
-    //Crear una actividad
+    //Crear un examen
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody Actividad actividad, UriComponentsBuilder ucb){
 
@@ -46,24 +48,21 @@ public class ActividadController {
         return ResponseEntity.created(uri).build();
     }
 
-    //Actualizar una actividad
+    //Actualizar un examen
     @PutMapping ("/{idActividad}")
     public ResponseEntity<Void> update (@PathVariable Integer idActividad, @RequestBody Actividad actividad){
 
         Optional<Actividad> actividadOptional = actividadRepository.findById(idActividad);
-
         if (!actividadOptional.isPresent()){
             return ResponseEntity.unprocessableEntity().build();
         }
-
-
         actividad.setIdActividad(actividadOptional.get().getIdActividad());
         actividadRepository.save(actividad);
         return ResponseEntity.noContent().build();
     }
 
-    //Borrar una actividad
-    @DeleteMapping("/{idActividad}")
+    //Borrar un curso
+    @DeleteMapping("/{idExamen}")
     public ResponseEntity<Void> delete (@PathVariable Integer idActividad){
         if (actividadRepository.findById(idActividad).get() == null){
             return ResponseEntity.notFound().build();

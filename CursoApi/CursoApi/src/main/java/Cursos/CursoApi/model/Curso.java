@@ -22,15 +22,8 @@ public class Curso {
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Actividad> actividades;
 
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
-    private List<Examen> examenes;
-
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "usuario_curso",
-        joinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"),
-        inverseJoinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    )
+    @JoinTable(name = "usuario_curso", joinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"), inverseJoinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"))
     private List<Usuario> usuarios;
 
     @OneToOne(mappedBy = "curso", cascade = CascadeType.ALL)
@@ -82,16 +75,8 @@ public class Curso {
         return certificado;
     }
 
-    public List<Examen> getExamenes() {
-        return examenes;
-    }
-
     public List<Usuario> getUsuarios() {
         return usuarios;
-    }
-
-    public void setExamenes(List<Examen> examenes) {
-        this.examenes = examenes;
     }
 
     public List<Actividad> getActividades() {
@@ -118,7 +103,6 @@ public class Curso {
                 ", imagen='" + imagen + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", actividades=" + actividades +
-                ", examenes=" + examenes +
                 '}';
     }
 

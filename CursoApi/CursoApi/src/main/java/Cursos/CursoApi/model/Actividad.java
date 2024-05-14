@@ -10,10 +10,11 @@ public class Actividad {
     private Integer idActividad;
 
     @ManyToOne
+    @JoinColumn(name = "idCurso")
     private List<Curso> cursos;
-    
+
     @Column(nullable = false, length = 250)
-    private String descripcion;
+    private String pregunta;
 
     @Column(nullable = false, length = 5)
     private boolean esCorrecto;
@@ -21,8 +22,8 @@ public class Actividad {
     @Column(nullable = false, length = 6)
     private float calificacion;
 
-    public Actividad(String descripcion, boolean esCorrecto, float calificacion) {
-        this.descripcion = descripcion;
+    public Actividad(String pregunta, boolean esCorrecto, float calificacion) {
+        this.pregunta = pregunta;
         this.esCorrecto = esCorrecto;
         this.calificacion = calificacion;
     }
@@ -30,46 +31,53 @@ public class Actividad {
     public Actividad() {
     }
 
-    public Integer getId_Actividad() {
-        return id_Actividad;
+    public Integer getIdActividad() {
+        return idActividad;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setIdActividad(Integer idActividad) {
+        this.idActividad = idActividad;
     }
 
-    public boolean getCompletada() {
-        return completada;
+    public List<Curso> getCursos() {
+        return cursos;
     }
 
-    public double getCalificacion() {
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public boolean getEsCorrecto() {
+        return esCorrecto;
+    }
+
+    public void setEsCorrecto(boolean esCorrecto) {
+        this.esCorrecto = esCorrecto;
+    }
+
+    public float getCalificacion() {
         return calificacion;
     }
 
-    public void setId_Actividad(Integer id_Actividad) {
-        this.id_Actividad = id_Actividad;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setCompletada(boolean completada) {
-        this.completada = completada;
-    }
-
-    public void setCalificacion(double calificacion) {
+    public void setCalificacion(float calificacion) {
         this.calificacion = calificacion;
     }
-
-    
 
     @Override
     public String toString() {
         return "Actividad{" +
-                "id_Actividad=" + id_Actividad +
-                ", descripcion='" + descripcion + '\'' +
-                ", completada=" + completada +
+                "idActividad=" + idActividad +
+                ", cursos=" + cursos +
+                ", pregunta='" + pregunta + '\'' +
+                ", esCorrecto=" + esCorrecto +
                 ", calificacion=" + calificacion +
                 '}';
     }

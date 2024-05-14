@@ -12,97 +12,90 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCurso;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "CCT")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Escuela escuela;
-
-    @OneToOne(mappedBy = "curso", cascade = CascadeType.ALL)
-    Certificado certificado;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_Docente")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Docente docente;
-
-    @OneToMany(mappedBy = "curso")
-    private List<Curso_Leccion> curso_Lecciones;
-
     @Column(nullable = false, length = 50)
     private String nombre;
 
     @Column(nullable = false, length = 50)
-    private String descripcion;
-
-    @Column(nullable = false, length = 255)
     private String imagen;
 
-    public Curso(Docente docente, String nombre, String descripcion, String imagen) {
-        this.docente = docente;
+    @Column(nullable = false, length = 50)
+    private String descripcion;
+
+    @OneToMany(mappedBy = "cursos", cascade = CascadeType.ALL)
+    private List<Actividad> actividades;
+
+    @OneToMany(mappedBy = "cursos", cascade = CascadeType.ALL)
+    private List<Examen> examenes;
+
+    public Curso(String nombre, String imagen, String descripcion) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.imagen = imagen;
+        this.descripcion = descripcion;
     }
 
-    public Curso() {
+    public Curso(){
+
     }
 
     public Integer getIdCurso() {
         return idCurso;
     }
 
-    public Docente getDocente() {
-        return docente;
+    public void setIdCurso(Integer idCurso) {
+        this.idCurso = idCurso;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getImagen() {
         return imagen;
     }
 
-    public Escuela getEscuela() {
-        return escuela;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    public void setIdCurso(Integer idCurso) {
-        this.idCurso = idCurso;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDocente(Docente docente) {
-        this.docente = docente;
+    public List<Examen> getExamenes() {
+        return examenes;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setExamenes(List<Examen> examenes) {
+        this.examenes = examenes;
+    }
+
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = actividades;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
 
-    public void setEscuela(Escuela escuela) {
-        this.escuela = escuela;
-    }
-
+    
     @Override
     public String toString() {
         return "Curso{" +
                 "idCurso=" + idCurso +
-                ", docente=" + docente +
                 ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
                 ", imagen='" + imagen + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", actividades=" + actividades +
+                ", examenes=" + examenes +
                 '}';
     }
 

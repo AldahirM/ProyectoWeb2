@@ -1,6 +1,6 @@
 package Cursos.CursoApi.controller;
 
-import Cursos.CursoApi.model.Inicio_Sesion;
+import Cursos.CursoApi.model.InicioSesion;
 import Cursos.CursoApi.repository.Inicio_SesionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,19 +11,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/inicio_sesion")
-public class Inicio_SesionController {
+public class InicioSesionController {
 
     @Autowired
     Inicio_SesionRepository inicioSesionRepository;
 
     @GetMapping
-    public ResponseEntity<Iterable<Inicio_Sesion>> getInicioSesiones() {
+    public ResponseEntity<Iterable<InicioSesion>> getInicioSesiones() {
         return ResponseEntity.ok(inicioSesionRepository.findAll());////fdsfd
     }
 
     @GetMapping("/{id_Inicio_Sesion}")
-    public ResponseEntity<Inicio_Sesion> getInicioSesion(@PathVariable Integer id_Inicio_Sesion) {
-        Optional<Inicio_Sesion> inicioSesionOptional = inicioSesionRepository.findById(id_Inicio_Sesion);
+    public ResponseEntity<InicioSesion> getInicioSesion(@PathVariable Integer id_Inicio_Sesion) {
+        Optional<InicioSesion> inicioSesionOptional = inicioSesionRepository.findById(id_Inicio_Sesion);
         if (inicioSesionOptional.isPresent()) {
             return ResponseEntity.ok(inicioSesionOptional.get());
         } else {
@@ -32,15 +32,15 @@ public class Inicio_SesionController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Inicio_Sesion newInicioSesion, UriComponentsBuilder ucb) {
-        Inicio_Sesion savedInicioSesion = inicioSesionRepository.save(newInicioSesion);
+    public ResponseEntity<Void> create(@RequestBody InicioSesion newInicioSesion, UriComponentsBuilder ucb) {
+        InicioSesion savedInicioSesion = inicioSesionRepository.save(newInicioSesion);
         URI uri = ucb.path("/inicio_sesion/{id_Inicio_Sesion}").buildAndExpand(savedInicioSesion.getIdInicio_Sesion()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/{id_Inicio_Sesion}")
-    public ResponseEntity<Void> update(@PathVariable Integer id_Inicio_Sesion, @RequestBody Inicio_Sesion inicioSesionAct) {
-        Inicio_Sesion inicioSesionAnt = inicioSesionRepository.findById(id_Inicio_Sesion).get();
+    public ResponseEntity<Void> update(@PathVariable Integer id_Inicio_Sesion, @RequestBody InicioSesion inicioSesionAct) {
+        InicioSesion inicioSesionAnt = inicioSesionRepository.findById(id_Inicio_Sesion).get();
         if (inicioSesionAnt != null) {
             inicioSesionAct.setId_Inicio_Sesion(inicioSesionAnt.getIdInicio_Sesion());
             inicioSesionRepository.save(inicioSesionAct);

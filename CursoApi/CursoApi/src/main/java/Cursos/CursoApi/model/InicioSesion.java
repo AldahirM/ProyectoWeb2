@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-public class Inicio_Sesion {
+public class InicioSesion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_Inicio_Sesion;
@@ -24,14 +24,14 @@ public class Inicio_Sesion {
     @Column(nullable = false, length = 5)
     private boolean valido;
 
-    public Inicio_Sesion(Usuario usuario, Date fecha, Time hora, boolean valido) {
+    public InicioSesion(Usuario usuario, Date fecha, Time hora, boolean valido) {
         this.usuario = usuario;
         this.fecha = fecha;
         this.hora = hora;
         this.valido = valido;
     }
 
-    public Inicio_Sesion() {
+    public InicioSesion() {
     }
 
     public Integer getIdInicio_Sesion() {

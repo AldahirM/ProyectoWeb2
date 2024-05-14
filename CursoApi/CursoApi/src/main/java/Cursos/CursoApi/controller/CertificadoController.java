@@ -2,8 +2,6 @@ package Cursos.CursoApi.controller;
 
 import Cursos.CursoApi.model.Certificado;
 import Cursos.CursoApi.model.Curso;
-import Cursos.CursoApi.model.Docente;
-import Cursos.CursoApi.model.Escuela;
 import Cursos.CursoApi.repository.CertificadoRepository;
 import Cursos.CursoApi.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

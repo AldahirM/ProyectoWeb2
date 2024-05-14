@@ -41,7 +41,7 @@ public class ActividadController {
         Actividad savedActividad = actividadRepository.save(actividad);
         URI uri = ucb
                 .path("actividad/{idActividad}")
-                .buildAndExpand(savedActividad.getId_Actividad())
+                .buildAndExpand(savedActividad.getIdActividad())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
@@ -57,7 +57,7 @@ public class ActividadController {
         }
 
 
-        actividad.setId_Actividad(actividadOptional.get().getId_Actividad());
+        actividad.setIdActividad(actividadOptional.get().getIdActividad());
         actividadRepository.save(actividad);
         return ResponseEntity.noContent().build();
     }

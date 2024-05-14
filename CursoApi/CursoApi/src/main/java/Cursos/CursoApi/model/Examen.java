@@ -9,54 +9,97 @@ public class Examen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_Examen;
+    private Integer idExamen;
 
-    @OneToMany(mappedBy = "examen")
-    private List<Examen_Pregunta> examen_preguntas;
+    @Column (nullable = false, length = 50)
+    private String nombreExamen;
 
-    @OneToOne (mappedBy = "examen", cascade = CascadeType.ALL)
-    Leccion leccion;
+    @OneToMany(mappedBy = "examen", cascade = CascadeType.ALL)
+    private List<Pregunta> preguntas;
 
-    @Column(nullable = false, length = 6)
-    private double calificacion;
+    @Column(nullable = false, length = 5)
+    private boolean esCorrecto;
 
-    public Examen() {
+    @Column(nullable = false, length = 7)
+    private float calificacion;
 
+    @ManyToOne
+    @JoinColumn(name = "idCurso")
+    private Curso curso;
+
+    @Column (nullable = false, length = 5)
+    private boolean completado;
+
+    public void setIdExamen(Integer idExamen) {
+        this.idExamen = idExamen;
     }
 
-    public Examen(double calificacion) {
+    public void setNombreExamen(String nombreExamen) {
+        this.nombreExamen = nombreExamen;
+    }
+
+    public void setPreguntas(List<Pregunta> preguntas) {
+        this.preguntas = preguntas;
+    }
+
+    public void setEsCorrecto(boolean esCorrecto) {
+        this.esCorrecto = esCorrecto;
+    }
+
+    public void setCalificacion(float calificacion) {
         this.calificacion = calificacion;
     }
 
-    public void setExamen_preguntas(List<Examen_Pregunta> examen_preguntas) {
-        this.examen_preguntas = examen_preguntas;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
+    public void setCompletado(boolean completado) {
+        this.completado = completado;
+    }
+
+    // Getters
     public Integer getIdExamen() {
-        return id_Examen;
+        return idExamen;
     }
 
-    public double getCalificacion() {
+    public String getNombreExamen() {
+        return nombreExamen;
+    }
+
+    public List<Pregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public boolean isEsCorrecto() {
+        return esCorrecto;
+    }
+
+    public float getCalificacion() {
         return calificacion;
     }
 
-    public void setIdExamen(Integer idExamen) {
-        this.id_Examen = idExamen;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public void setCalificacion(double calificacion) {
-        this.calificacion = calificacion;
+    public boolean isCompletado() {
+        return completado;
     }
 
-    public List<Examen_Pregunta> getExamen_preguntas() {
-        return examen_preguntas;
-    }
-
+    // toString
     @Override
     public String toString() {
         return "Examen{" +
-                "idExamen=" + id_Examen +
+                "idExamen=" + idExamen +
+                ", nombreExamen='" + nombreExamen + '\'' +
+                ", preguntas=" + preguntas +
+                ", esCorrecto=" + esCorrecto +
                 ", calificacion=" + calificacion +
+                ", curso=" + curso +
+                ", completado=" + completado +
                 '}';
     }
+
+
 }

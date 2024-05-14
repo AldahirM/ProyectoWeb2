@@ -22,12 +22,13 @@ public class ActividadController {
 
     //Consulta general
     @GetMapping()
-    public ResponseEntity<Iterable<Actividad>> findAll(){
+    public ResponseEntity<Iterable<Actividad>> findAll()
+    {
         return ResponseEntity.ok(actividadRepository.findAll());
     }
 
     //Consulta por id
-    @GetMapping("/{idExamen}")
+    @GetMapping("/{idActividad}")
     public  ResponseEntity<Actividad> findById(@PathVariable Integer idActividad){
         Optional<Actividad> examenOptional = actividadRepository.findById(idActividad);
         if (!examenOptional.isPresent()){
@@ -62,7 +63,7 @@ public class ActividadController {
     }
 
     //Borrar un curso
-    @DeleteMapping("/{idExamen}")
+    @DeleteMapping("/{idActividad}")
     public ResponseEntity<Void> delete (@PathVariable Integer idActividad){
         if (actividadRepository.findById(idActividad).get() == null){
             return ResponseEntity.notFound().build();

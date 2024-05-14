@@ -52,10 +52,6 @@ public class Actividad {
         return preguntasActividad;
     }
 
-    public Curso getCursos() {
-        return curso;
-    }
-
     public float getCalificacion() {
         return calificacion;
     }

@@ -9,7 +9,7 @@ import java.util.Date;
 public class InicioSesion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_Inicio_Sesion;
+    private Integer idInicioSesion;
 
     @OneToOne
     @JoinColumn(name = "id_Usuario")
@@ -24,8 +24,7 @@ public class InicioSesion {
     @Column(nullable = false, length = 5)
     private boolean valido;
 
-    public InicioSesion(Usuario usuario, Date fecha, Time hora, boolean valido) {
-        this.usuario = usuario;
+    public InicioSesion(Date fecha, Time hora, boolean valido) {
         this.fecha = fecha;
         this.hora = hora;
         this.valido = valido;
@@ -35,7 +34,7 @@ public class InicioSesion {
     }
 
     public Integer getIdInicio_Sesion() {
-        return id_Inicio_Sesion;
+        return idInicioSesion;
     }
 
     public Usuario getUsuario() {
@@ -50,8 +49,8 @@ public class InicioSesion {
         return hora;
     }
 
-    public void setId_Inicio_Sesion(Integer id_Inicio_Sesion) {
-        this.id_Inicio_Sesion = id_Inicio_Sesion;
+    public void setIdInicioSesion(Integer idInicioSesion) {
+        this.idInicioSesion = idInicioSesion;
     }
 
     public void setFecha(Date fecha) {
@@ -75,8 +74,7 @@ public class InicioSesion {
     @Override
     public String toString() {
         return "InicioSesion{" +
-                "idInicio_Sesion=" + id_Inicio_Sesion +
-                ", Usuario=" + usuario +
+                "idInicio_Sesion=" + idInicioSesion +
                 ", fecha=" + fecha +
                 ", hora=" + hora +
                 ", valido=" + valido +

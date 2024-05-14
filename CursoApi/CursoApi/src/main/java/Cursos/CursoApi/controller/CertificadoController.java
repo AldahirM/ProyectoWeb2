@@ -49,7 +49,7 @@ public class CertificadoController {
         Certificado savedCertificado = certificadoRepository.save(certificado);
         URI uri = ucb
                 .path("certificado/{idCertificado}")
-                .buildAndExpand(savedCertificado.getId_Certificado())
+                .buildAndExpand(savedCertificado.getIdCertificado())
                 .toUri();
         return ResponseEntity.created(uri).build();
     }

@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequestMapping("/inicio_sesion")
 public class InicioSesionController {
 
-    @Autowired
+    /*@Autowired
     Inicio_SesionRepository inicioSesionRepository;
 
     @GetMapping
@@ -56,5 +56,5 @@ public class InicioSesionController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
-    }
+    }*/
 }

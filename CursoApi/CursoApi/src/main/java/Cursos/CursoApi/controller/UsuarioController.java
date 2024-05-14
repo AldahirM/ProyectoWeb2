@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    @Autowired
+    /*@Autowired
     UsuarioRepository usuarioRepository;
 
     @GetMapping
@@ -71,5 +71,5 @@ public class UsuarioController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
-    }
+    }*/
 }

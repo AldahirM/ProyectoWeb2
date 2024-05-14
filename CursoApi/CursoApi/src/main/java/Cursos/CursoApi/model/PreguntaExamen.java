@@ -1,20 +1,19 @@
 package Cursos.CursoApi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 
-public class Pregunta {
+public class PreguntaExamen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPregunta;
+    private Integer idPreguntaExamen;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idExamen")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Examen examen;
-
-    @ManyToOne
-    @JoinColumn(name = "idActividad")
-    private Actividad actividad;
 
     @Column(nullable = false, length = 250)
     private String pregunta;
@@ -29,16 +28,12 @@ public class Pregunta {
     private boolean esCorrecto;
 
     // Setters
-    public void setIdPregunta(Integer idPregunta) {
-        this.idPregunta = idPregunta;
+    public void setIdPregunta(Integer idPreguntaExamen) {
+        this.idPreguntaExamen = idPreguntaExamen;
     }
 
     public void setExamen(Examen examen) {
         this.examen = examen;
-    }
-
-    public void setActividad(Actividad actividad) {
-        this.actividad = actividad;
     }
 
     public void setPregunta(String pregunta) {
@@ -59,15 +54,11 @@ public class Pregunta {
 
     // Getters
     public Integer getIdPregunta() {
-        return idPregunta;
+        return idPreguntaExamen;
     }
 
     public Examen getExamen() {
         return examen;
-    }
-
-    public Actividad getActividad() {
-        return actividad;
     }
 
     public String getPregunta() {
@@ -90,9 +81,7 @@ public class Pregunta {
     @Override
     public String toString() {
         return "Pregunta{" +
-                "idPregunta=" + idPregunta +
-                ", examen=" + examen +
-                ", actividad=" + actividad +
+                "idPregunta=" + idPreguntaExamen +
                 ", pregunta='" + pregunta + '\'' +
                 ", respuestaUsuario='" + respuestaUsuario + '\'' +
                 ", respuestaCorrecta='" + respuestaCorrecta + '\'' +

@@ -27,13 +27,13 @@ public class ActividadController {
     }
 
     //Consulta por id
-    @GetMapping("/{idExamen}")
+    @GetMapping("/{idActividad}")
     public  ResponseEntity<Actividad> findById(@PathVariable Integer idActividad){
-        Optional<Actividad> examenOptional = actividadRepository.findById(idActividad);
-        if (!examenOptional.isPresent()){
+        Optional<Actividad> actividadOptional = actividadRepository.findById(idActividad);
+        if (!actividadOptional.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(examenOptional.get());
+        return ResponseEntity.ok(actividadOptional.get());
     }
 
     //Crear un examen

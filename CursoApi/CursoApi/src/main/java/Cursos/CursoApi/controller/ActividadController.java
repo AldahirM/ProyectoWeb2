@@ -49,7 +49,7 @@ public class ActividadController {
         return ResponseEntity.created(uri).build();
     }
 
-    //Actualizar un examen
+    //Actualizar una actividad
     @PutMapping ("/{idActividad}")
     public ResponseEntity<Void> update (@PathVariable Integer idActividad, @RequestBody Actividad actividad){
 

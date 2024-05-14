@@ -17,7 +17,9 @@ public class Usuario {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
-    @JoinTable(name = "usuario_curso", joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idCurso"), inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idUsuario"))
+    @JoinTable(name = "usuario_curso",
+        joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"),
+        inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"))
     private List<Curso> cursos;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)

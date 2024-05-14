@@ -19,17 +19,17 @@ public class Curso {
     @Column(nullable = false, length = 250)
     private String descripcion;
 
-    @OneToMany(mappedBy = "cursos", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Actividad> actividades;
 
-    @OneToMany(mappedBy = "cursos", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Examen> examenes;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "usuario_curso",
-        joinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idUsuario"),
-        inverseJoinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idCurso")
+        joinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"),
+        inverseJoinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     )
     private List<Usuario> usuarios;
 

@@ -2,11 +2,15 @@ package Cursos.CursoApi.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCertificado")
+
 public class Certificado {
 
     @Id

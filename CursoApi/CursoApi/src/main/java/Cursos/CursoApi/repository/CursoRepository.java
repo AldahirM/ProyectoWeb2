@@ -2,8 +2,6 @@ package Cursos.CursoApi.repository;
 
 import Cursos.CursoApi.model.Curso;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

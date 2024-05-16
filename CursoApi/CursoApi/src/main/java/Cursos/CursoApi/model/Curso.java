@@ -98,6 +98,10 @@ public class Curso {
         this.usuarios = usuarios;
     }
 
+    public void addUsuarios(Usuario usuario) {
+        this.usuarios.add(usuario);
+    }
+
     @Override
     public String toString() {
         return "Curso{" +

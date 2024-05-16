@@ -9,11 +9,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/inicio_sesion")
+@RequestMapping("/iniciosesion")
 public class InicioSesionController {
 
-    /*@Autowired
+    @Autowired
     Inicio_SesionRepository inicioSesionRepository;
 
     @GetMapping
@@ -21,9 +22,9 @@ public class InicioSesionController {
         return ResponseEntity.ok(inicioSesionRepository.findAll());////fdsfd
     }
 
-    @GetMapping("/{id_Inicio_Sesion}")
-    public ResponseEntity<InicioSesion> getInicioSesion(@PathVariable Integer id_Inicio_Sesion) {
-        Optional<InicioSesion> inicioSesionOptional = inicioSesionRepository.findById(id_Inicio_Sesion);
+    @GetMapping("/{idInicioSesion}")
+    public ResponseEntity<InicioSesion> getInicioSesion(@PathVariable Integer idInicioSesion) {
+        Optional<InicioSesion> inicioSesionOptional = inicioSesionRepository.findById(idInicioSesion);
         if (inicioSesionOptional.isPresent()) {
             return ResponseEntity.ok(inicioSesionOptional.get());
         } else {
@@ -34,27 +35,27 @@ public class InicioSesionController {
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody InicioSesion newInicioSesion, UriComponentsBuilder ucb) {
         InicioSesion savedInicioSesion = inicioSesionRepository.save(newInicioSesion);
-        URI uri = ucb.path("/inicio_sesion/{id_Inicio_Sesion}").buildAndExpand(savedInicioSesion.getIdInicio_Sesion()).toUri();
+        URI uri = ucb.path("/iniciosesion/{idInicioSesion}").buildAndExpand(savedInicioSesion.getIdInicioSesion()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping("/{id_Inicio_Sesion}")
-    public ResponseEntity<Void> update(@PathVariable Integer id_Inicio_Sesion, @RequestBody InicioSesion inicioSesionAct) {
-        InicioSesion inicioSesionAnt = inicioSesionRepository.findById(id_Inicio_Sesion).get();
+    @PutMapping("/{idInicioSesion}")
+    public ResponseEntity<Void> update(@PathVariable Integer idInicioSesion, @RequestBody InicioSesion inicioSesionAct) {
+        InicioSesion inicioSesionAnt = inicioSesionRepository.findById(idInicioSesion).get();
         if (inicioSesionAnt != null) {
-            inicioSesionAct.setId_Inicio_Sesion(inicioSesionAnt.getIdInicio_Sesion());
+            inicioSesionAct.setIdInicioSesion(inicioSesionAnt.getIdInicioSesion());
             inicioSesionRepository.save(inicioSesionAct);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id_Inicio_Sesion}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id_Inicio_Sesion) {
-        if (inicioSesionRepository.findById(id_Inicio_Sesion).isPresent()) {
-            inicioSesionRepository.deleteById(id_Inicio_Sesion);
+    @DeleteMapping("/{idInicioSesion}")
+    public ResponseEntity<Void> delete(@PathVariable Integer idInicioSesion) {
+        if (inicioSesionRepository.findById(idInicioSesion).isPresent()) {
+            inicioSesionRepository.deleteById(idInicioSesion);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
-    }*/
+    }
 }

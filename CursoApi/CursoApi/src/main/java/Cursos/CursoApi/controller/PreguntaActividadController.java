@@ -1,5 +1,4 @@
 package Cursos.CursoApi.controller;
-import Cursos.CursoApi.model.Actividad;
 import Cursos.CursoApi.model.PreguntaActividad;
 import Cursos.CursoApi.repository.PreguntaActividadRepository;
 import org.springframework.beans.factory.annotation.Autowired;

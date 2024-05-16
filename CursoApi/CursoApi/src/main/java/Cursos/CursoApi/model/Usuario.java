@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class Usuario {
 
     @Id
-    @Column(name = "idCorreo", nullable = false, length = 10)
+    @Column(name = "idCorreo", nullable = false, length = 80)
     private String idCorreo;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -34,16 +34,16 @@ public class Usuario {
     @Column(nullable = false, length = 80)
     private String apeMat;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 3)
     private Integer edad;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 20)
     private String sexo;
 
     @Column(nullable = false, length = 50)
     private String contrasena;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 20)
     private String tipoUsuario;
 
     // Setters
@@ -134,6 +134,10 @@ public class Usuario {
 
     public String getTipoUsuario() {
         return tipoUsuario;
+    }
+
+    public void addCursos(Curso curso) {
+        this.cursos.add(curso);
     }
 
     // toString

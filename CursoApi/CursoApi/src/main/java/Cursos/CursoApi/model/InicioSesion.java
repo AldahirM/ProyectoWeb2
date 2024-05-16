@@ -33,7 +33,7 @@ public class InicioSesion {
     public InicioSesion() {
     }
 
-    public Integer getIdInicio_Sesion() {
+    public Integer getIdInicioSesion() {
         return idInicioSesion;
     }
 

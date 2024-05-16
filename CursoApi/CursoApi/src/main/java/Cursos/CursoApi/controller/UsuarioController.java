@@ -3,13 +3,13 @@ package Cursos.CursoApi.controller;
 import Cursos.CursoApi.model.Usuario;
 import Cursos.CursoApi.model.Curso;
 import Cursos.CursoApi.repository.UsuarioRepository;
+import Cursos.CursoApi.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
-
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -18,6 +18,9 @@ public class UsuarioController {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    CursoRepository cursoRepository;
 
     @GetMapping
     public ResponseEntity<Iterable<Usuario>> getUsuarios() {
@@ -61,13 +64,33 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/{idCorreo}/curso/{idCurso}")
+    public ResponseEntity<Usuario> addUsuario(@PathVariable(value = "idCorreo") String idCorreo,
+            @PathVariable(value = "idCurso") Integer idCurso) {
+        Optional<Curso> cursoOptional = cursoRepository.findById(idCurso);
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idCorreo);
+        if (!cursoOptional.isPresent() || !usuarioOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        } else if (!cursoOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        } else if (!usuarioOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            Curso curso = cursoOptional.get();
+            Usuario usuario = usuarioOptional.get();
+            curso.addUsuarios(usuario);
+            usuarioRepository.save(usuario);
+        }
+        return ResponseEntity.ok(usuarioOptional.get());
+    }
+
     @GetMapping("/{idUsuario}/cursos")
     public ResponseEntity<Iterable<Curso>> getCursos(@PathVariable String idUsuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
-        if (usuarioOptional.isPresent()) {
-            return ResponseEntity.ok(usuarioOptional.get().getCursos());
+        if (!usuarioOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
-
+        return ResponseEntity.ok(usuarioOptional.get().getCursos());
+        
     }
 }

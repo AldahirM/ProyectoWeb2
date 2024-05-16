@@ -19,7 +19,7 @@ public class PreguntaActividad {
     @Column(nullable = false, length = 250)
     private String pregunta;
 
-    @Column(nullable = false, length = 250)
+    @Column(nullable = true, length = 250)
     private String respuestaUsuario;
 
     @Column(nullable = false, length = 250)
@@ -83,7 +83,6 @@ public class PreguntaActividad {
     public String toString() {
         return "Pregunta{" +
                 "idPregunta=" + idPreguntaActividad +
-                ", pregunta='" + pregunta + '\'' +
                 ", respuestaUsuario='" + respuestaUsuario + '\'' +
                 ", respuestaCorrecta='" + respuestaCorrecta + '\'' +
                 ", esCorrecto=" + esCorrecto +

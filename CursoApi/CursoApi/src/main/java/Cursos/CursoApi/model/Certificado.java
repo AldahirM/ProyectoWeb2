@@ -109,8 +109,10 @@ public class Certificado {
     }
 
 
+    public Certificado(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-
-    
-
+    public Certificado() {
+    }
 }

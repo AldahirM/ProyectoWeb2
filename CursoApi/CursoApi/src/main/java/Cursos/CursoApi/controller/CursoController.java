@@ -1,5 +1,6 @@
 package Cursos.CursoApi.controller;
 
+import Cursos.CursoApi.model.Actividad;
 import Cursos.CursoApi.model.Curso;
 import Cursos.CursoApi.model.Usuario;
 import Cursos.CursoApi.repository.CursoRepository;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -92,5 +94,17 @@ public class CursoController {
         }
         return ResponseEntity.ok(usuarioOptional.get());
     }
+
+    @GetMapping("/{idCurso}/actividades")
+    public ResponseEntity<List<Actividad>> getActividadesByCursoId(@PathVariable Integer idCurso) {
+        Optional<Curso> cursoOptional = cursoRepository.findById(idCurso);
+        if (!cursoOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Actividad> actividades = cursoOptional.get().getActividades();
+        return ResponseEntity.ok(actividades);
+    }
+
 
 }

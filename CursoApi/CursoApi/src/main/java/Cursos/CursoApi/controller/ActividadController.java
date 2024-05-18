@@ -2,9 +2,11 @@ package Cursos.CursoApi.controller;
 
 import Cursos.CursoApi.model.Actividad;
 import Cursos.CursoApi.model.Curso;
+import Cursos.CursoApi.model.PreguntaActividad;
 import Cursos.CursoApi.repository.ActividadRepository;
 
 import Cursos.CursoApi.repository.CursoRepository;
+import Cursos.CursoApi.repository.PreguntaActividadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,9 @@ public class ActividadController {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private PreguntaActividadRepository preguntaActividadRepository;
 
     //Consulta general
     @GetMapping()
@@ -87,6 +92,17 @@ public class ActividadController {
 
         List<Actividad> actividades = cursoOptional.get().getActividades();
         return ResponseEntity.ok(actividades);
+    }
+
+    @GetMapping("/{idActividad}/preguntas")
+    public ResponseEntity<List<PreguntaActividad>> getPreguntasByActividadId(@PathVariable Integer idActividad) {
+        Optional<Actividad> actividadOptional = actividadRepository.findById(idActividad);
+        if (!actividadOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<PreguntaActividad> preguntas = actividadOptional.get().getPreguntasActividad(); // Suponiendo que tienes un método getPreguntas() en la entidad Actividad que devuelve todas las preguntas asociadas a esa actividad
+        return ResponseEntity.ok(preguntas);
     }
 
 }

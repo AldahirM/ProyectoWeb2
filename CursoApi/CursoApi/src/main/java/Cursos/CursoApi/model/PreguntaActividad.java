@@ -11,7 +11,7 @@ public class PreguntaActividad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPreguntaActividad;
 
-    @ManyToOne (fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idActividad")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Actividad actividad;
@@ -27,6 +27,9 @@ public class PreguntaActividad {
 
     @Column(nullable = false, length = 5)
     private boolean esCorrecto;
+
+    @Column(length = 50000)
+    private String informacion;
 
     // Setters
     public void setIdPregunta(Integer idPregunta) {
@@ -51,6 +54,10 @@ public class PreguntaActividad {
 
     public void setEsCorrecto(boolean esCorrecto) {
         this.esCorrecto = esCorrecto;
+    }
+
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
     }
 
     // Getters
@@ -78,16 +85,20 @@ public class PreguntaActividad {
         return esCorrecto;
     }
 
+    public String getInformacion() {
+        return informacion;
+    }
+
     // toString
     @Override
     public String toString() {
-        return "Pregunta{" +
-                "idPregunta=" + idPreguntaActividad +
+        return "PreguntaActividad{" +
+                "idPreguntaActividad=" + idPreguntaActividad +
+                ", pregunta='" + pregunta + '\'' +
                 ", respuestaUsuario='" + respuestaUsuario + '\'' +
                 ", respuestaCorrecta='" + respuestaCorrecta + '\'' +
                 ", esCorrecto=" + esCorrecto +
+                ", informacion='" + informacion + '\'' +
                 '}';
     }
-
-
 }

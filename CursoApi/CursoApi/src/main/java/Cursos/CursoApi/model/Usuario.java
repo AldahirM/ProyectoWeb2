@@ -1,5 +1,6 @@
 package Cursos.CursoApi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -154,4 +155,21 @@ public class Usuario {
                 ", tipoUsuario='" + tipoUsuario + '\'' +
                 '}';
     }
+
+    public Usuario() {
+
+    }
+
+    public Usuario(String idCorreo, String nombre, String apePat, String apeMat, Integer edad, String sexo, String contrasena, String tipoUsuario) {
+        this.idCorreo = idCorreo;
+        this.nombre = nombre;
+        this.apePat = apePat;
+        this.apeMat = apeMat;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
+    }
+
+
 }

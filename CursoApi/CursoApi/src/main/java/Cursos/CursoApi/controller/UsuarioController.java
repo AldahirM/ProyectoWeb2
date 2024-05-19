@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -55,42 +56,43 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id_Usuario}")
-    public ResponseEntity<Void> delete(@PathVariable String idUsuario) {
-        if (usuarioRepository.findById(idUsuario).isPresent()) {
-            usuarioRepository.deleteById(idUsuario);
-            return ResponseEntity.noContent().build();
+    @DeleteMapping("/{idCorreo}")
+    public ResponseEntity<Void> delete(@PathVariable String idCorreo) {
+        if (usuarioRepository.findById(idCorreo).get() == null) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
+        usuarioRepository.deleteById(idCorreo);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{idCorreo}/curso/{idCurso}")
     public ResponseEntity<Usuario> addUsuario(@PathVariable(value = "idCorreo") String idCorreo,
-            @PathVariable(value = "idCurso") Integer idCurso) {
+                                              @PathVariable(value = "idCurso") Integer idCurso) {
         Optional<Curso> cursoOptional = cursoRepository.findById(idCurso);
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(idCorreo);
         if (!cursoOptional.isPresent() || !usuarioOptional.isPresent()) {
             return ResponseEntity.notFound().build();
-        } else if (!cursoOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        } else if (!usuarioOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            Curso curso = cursoOptional.get();
-            Usuario usuario = usuarioOptional.get();
-            curso.addUsuarios(usuario);
-            usuarioRepository.save(usuario);
         }
-        return ResponseEntity.ok(usuarioOptional.get());
+
+        Curso curso = cursoOptional.get();
+        Usuario usuario = usuarioOptional.get();
+
+        usuario.addCursos(curso); // Agrega el curso al usuario
+
+        usuarioRepository.save(usuario); // Guarda el usuario actualizado en la base de datos
+
+        return ResponseEntity.ok(usuario);
     }
 
+
     @GetMapping("/{idUsuario}/cursos")
-    public ResponseEntity<Iterable<Curso>> getCursos(@PathVariable String idUsuario) {
+    public ResponseEntity<List<Curso>> getCursos(@PathVariable String idUsuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
         if (!usuarioOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(usuarioOptional.get().getCursos());
+        List<Curso> cursos = usuarioOptional.get().getCursos();
+        return ResponseEntity.ok(cursos);
         
     }
 }

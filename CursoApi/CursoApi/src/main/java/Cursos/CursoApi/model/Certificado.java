@@ -10,14 +10,13 @@ import jakarta.persistence.*;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCertificado")
-
 public class Certificado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCertificado;
 
-    @OneToOne 
+    @OneToOne
     @JoinColumn(name = "idCurso")
     private Curso curso;
 
@@ -26,17 +25,27 @@ public class Certificado {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Usuario usuario;
 
-    @Column (nullable = false, length = 250)
+    @Column(nullable = false, length = 250)
     private String nombreCurso;
 
-    @Column (nullable = false, length = 250)
+    @Column(nullable = false, length = 250)
     private String nombreUsuario;
 
-    @Column (nullable = false, length = 250)
+    @Column(nullable = false, length = 250)
     private Date fecha;
 
-    @Column (nullable = false, length = 10)
+    @Column(nullable = false, length = 10)
     private float promedioCurso;
+
+    public Certificado(String nombreCurso, String nombreUsuario, Date fecha, float promedioCurso) {
+        this.nombreCurso = nombreCurso;
+        this.nombreUsuario = nombreUsuario;
+        this.fecha = fecha;
+        this.promedioCurso = promedioCurso;
+    }
+
+    public Certificado() {
+    }
 
     // Setters
     public void setIdCertificado(Integer idCertificado) {
@@ -101,6 +110,8 @@ public class Certificado {
     public String toString() {
         return "Certificado{" +
                 "idCertificado=" + idCertificado +
+                ", curso=" + curso +
+                ", usuario=" + usuario +
                 ", nombreCurso='" + nombreCurso + '\'' +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", fecha=" + fecha +
@@ -108,11 +119,6 @@ public class Certificado {
                 '}';
     }
 
+    // Constructors
 
-    public Certificado(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Certificado() {
-    }
 }

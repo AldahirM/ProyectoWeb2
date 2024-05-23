@@ -6,7 +6,6 @@ import Cursos.CursoApi.model.PreguntaActividad;
 import Cursos.CursoApi.repository.ActividadRepository;
 
 import Cursos.CursoApi.repository.CursoRepository;
-import Cursos.CursoApi.repository.PreguntaActividadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +25,6 @@ public class ActividadController {
 
     @Autowired
     private CursoRepository cursoRepository;
-
-    @Autowired
-    private PreguntaActividadRepository preguntaActividadRepository;
 
     //Consulta general
     @GetMapping()

@@ -1,7 +1,9 @@
 package Cursos.CursoApi.controller;
 
 import Cursos.CursoApi.model.InicioSesion;
+import Cursos.CursoApi.model.Usuario;
 import Cursos.CursoApi.repository.Inicio_SesionRepository;
+import Cursos.CursoApi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,12 @@ public class InicioSesionController {
     @Autowired
     Inicio_SesionRepository inicioSesionRepository;
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
     @GetMapping
     public ResponseEntity<Iterable<InicioSesion>> getInicioSesiones() {
-        return ResponseEntity.ok(inicioSesionRepository.findAll());////fdsfd
+        return ResponseEntity.ok(inicioSesionRepository.findAll());
     }
 
     @GetMapping("/{idInicioSesion}")
@@ -52,10 +57,21 @@ public class InicioSesionController {
 
     @DeleteMapping("/{idInicioSesion}")
     public ResponseEntity<Void> delete(@PathVariable Integer idInicioSesion) {
-        if (inicioSesionRepository.findById(idInicioSesion).isPresent()) {
+        Optional<InicioSesion> inicioSesionOptional = inicioSesionRepository.findById(idInicioSesion);
+        if (inicioSesionOptional.isPresent()) {
             inicioSesionRepository.deleteById(idInicioSesion);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/usuario/{idCorreo}")
+    public ResponseEntity<InicioSesion> getInicioSesionByUsuario(@PathVariable String idCorreo) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(idCorreo);
+        if (usuarioOptional.isPresent()) {
+            return ResponseEntity.ok(usuarioOptional.get().getInicioSesion());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

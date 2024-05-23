@@ -22,7 +22,7 @@ public class Usuario {
         inverseJoinColumns = @JoinColumn(name = "idCurso", referencedColumnName = "idCurso"))
     private List<Curso> cursos;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "usuario")
     private InicioSesion inicioSesion;
 
     @Column(nullable = false, length = 80)
